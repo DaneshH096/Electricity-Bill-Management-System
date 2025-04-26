@@ -1,0 +1,115 @@
+body {
+  background: linear-gradient(135deg, #c3ecf7, #a0c1f7);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.glass-container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  width: 350px;
+  margin: auto;
+  margin-top: 100px;
+}
+
+.glass-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  z-index: 9999;
+  opacity: 0.95;
+  display: none;
+}
+
+.popup.success {
+  background-color: #4CAF50;
+  border: 2px solid green;
+}
+
+.popup.error {
+  background-color: #f44336;
+  border: 2px solid red;
+}
+
+
+
+
+
+
+
+
+
+
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.bill-table th, .bill-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.bill-table th {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.bill-table td {
+  background-color: #f9f9f9;
+}
+
+.bill-table button {
+  background-color: #3498db;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bill-table button:hover {
+  background-color: #2980b9;
+}
+
+.no-data-message {
+  color: gray;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}

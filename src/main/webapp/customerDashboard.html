@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="glass-container">
+    <h2>Welcome, Customer</h2>
+    <p>Your electricity bill details:</p>
+    
+    <div id="errorContainer"></div>
+    
+    <div id="customerInfo" class="customer-info"></div>
+    
+    <div id="billTable">
+      <!-- Table will be populated by CustomerDashboardServlet -->
+      <p class="no-data-message">Loading bill details...</p>
+    </div>
+    
+    <form action="LogoutServlet" method="post">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+
+  <script>
+    // Fetch customer dashboard data when page loads
+    window.onload = function() {
+      fetch('CustomerDashboardServlet')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(html => {
+          document.getElementById('billTable').innerHTML = html;
+        })
+        .catch(error => {
+          document.getElementById('errorContainer').innerHTML = 
+            '<div class="error-message">Error loading data: ' + error.message + '</div>';
+        });
+    };
+  </script>
+    <script src="js/popup.js"></script>
+  
+</body>
+</html>

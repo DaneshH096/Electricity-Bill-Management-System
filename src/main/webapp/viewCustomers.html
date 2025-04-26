@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Customers</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="glass-container">
+    <h2>All Customers</h2>
+    <div id="customer-table">Loading...</div>
+    <button onclick="window.history.back()">Back</button>
+  </div>
+
+  <script src="js/popup.js"></script>
+  <script>
+    fetch("AllCustomersServlet")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("customer-table").innerHTML = html;
+      });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const msg = urlParams.get("message");
+    const status = urlParams.get("status");
+    if (msg && status) showPopup(msg, status);
+  </script>
+</body>
+</html>

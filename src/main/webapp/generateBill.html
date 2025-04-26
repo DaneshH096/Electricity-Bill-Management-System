@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Bill</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="glass-container">
+    <h2>Generate Bill</h2>
+    <form method="post" action="GenerateBillServlet">
+      <label>Meter Number:</label>
+      <input type="text" name="meter_no" required><br>
+
+      <label>Month:</label>
+      <input type="text" name="month" placeholder="e.g. April 2025" required><br>
+
+      <label>Units Consumed:</label>
+      <input type="number" name="units" required><br>
+
+      <button type="submit">Generate</button>
+    </form>
+    <button onclick="window.history.back()">Back</button>
+  </div>
+
+  <script src="js/popup.js"></script>
+</body>
+</html>

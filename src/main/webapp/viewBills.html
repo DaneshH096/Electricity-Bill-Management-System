@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Bills</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="glass-container">
+    <h2>View Bills by Meter No.</h2>
+    <form method="get" action="ViewBillsServlet">
+      <label>Meter Number:</label>
+      <input type="text" name="meter_no" required>
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="billTable">
+      <!-- Bills will be displayed here -->
+    </div>
+
+    <button onclick="window.history.back()">Back</button>
+  </div>
+
+  <script src="js/popup.js"></script>
+</body>
+</html>
