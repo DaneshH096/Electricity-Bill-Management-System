@@ -27,14 +27,13 @@ public class GenerateBillServlet extends HttpServlet {
 
             int result = ps.executeUpdate();
             if (result > 0) {
-                out.println("<script>alert('Bill Generated Successfully!'); location='adminDashboard.html';</script>");
+                out.println("<script>alert('Bill Generated Successfully!'); location='"+request.getContextPath()+"/adminDashboard.html';</script>");
             } else {
-                out.println("<script>alert('Failed to generate bill'); location='generateBill.html';</script>");
-                response.sendRedirect("generateBill.html?message=Failed to generate bill.&status=error");
+                out.println("<script>alert('Failed to generate bill'); location='"+request.getContextPath()+"/generateBill.html';</script>");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            out.println("<script>alert('Error Occurred'); location='generateBill.html';</script>");
+            out.println("<script>alert('Error Occurred'); location='"+request.getContextPath()+"/generateBill.html';</script>");
         }
     }
 
