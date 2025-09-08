@@ -6,6 +6,7 @@ public class DBConnection {
     public static Connection getConnection() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/electricity_db", "root", "root123");
+            "jdbc:mysql://yamanote.proxy.rlwy.net:58736/electricity_db", "root", "RpZLDRFfrjUKgxYfUIwfTASbiVvUAnEA");
     }
 }
+
