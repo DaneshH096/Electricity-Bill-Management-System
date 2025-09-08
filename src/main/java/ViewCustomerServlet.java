@@ -19,13 +19,12 @@ public class ViewCustomerServlet extends HttpServlet {
         out.println("</head><body>");
         out.println("<div class='glass-container'>");
         out.println("<h2>Customer List</h2>");
-        out.println("<table border='1' cellpadding='10'>");
+        out.println("<table border='1' class='glass-table' cellpadding='10'>");
         out.println("<tr><th>ID</th><th>Name</th><th>Email</th><th>Mobile</th><th>Status</th><th>Action</th></tr>");
 
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM customer")) {
-
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -48,10 +47,9 @@ public class ViewCustomerServlet extends HttpServlet {
                     out.println("<button type='submit'>Approve</button>");
                     out.println("</form>");
 
-                    out.println("<form method='post' action='UpdateCustomerStatusServlet' style='display:inline;'>");
+                    out.println("<form method='post' action='DeleteCustomerServlet' style='display:inline;'>");
                     out.println("<input type='hidden' name='id' value='" + id + "'>");
-                    out.println("<input type='hidden' name='status' value='rejected'>");
-                    out.println("<button type='submit'>Reject</button>");
+                    out.println("<button type='submit' >Reject❌</button>");
                     out.println("</form>");
                 } else {
                     out.println(status);

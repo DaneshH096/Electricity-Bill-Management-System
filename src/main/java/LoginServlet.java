@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             if (adminRs.next()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", username);
-                out.println("<script>alert('Admin Login Successfull'); location='adminDashboard.html';</script>");
+                out.println("<script>alert('Admin Login Successfull');location='"+request.getContextPath()+"/adminDashboard.html';</script>");
                 return;
             }
 
@@ -44,14 +44,14 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
 
                 session.setAttribute("meter_no", custRs.getString("meter_no"));
-                out.println("<script>alert('Customer Login Successfull'); location='customerDashboard.html';</script>");
+                out.println("<script>alert('Customer Login Successfull'); location='"+request.getContextPath()+"/customerDashboard.html';</script>");
             } else {
-            	out.println("<script>alert('Invalid username or password'); location='login.html';</script>");
+            	out.println("<script>alert('Invalid username or password'); location='"+request.getContextPath()+"/login.html';</script>");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("login.html?message=Internal server error&status=error");
+        	out.println("<script>alert('Internal server error'); location='"+request.getContextPath()+"/login.html';</script>");
         }
     }
     

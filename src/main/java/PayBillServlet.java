@@ -17,30 +17,45 @@ public class PayBillServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String billIdStr = request.getParameter("bill_id");
+        // Check if coming from customer or admin
+        String billIdStr = request.getParameter("bill_id"); // from customer
+        String billIdAdm = request.getParameter("id");      // from admin
 
-        if (billIdStr == null || billIdStr.isEmpty()) {
-            out.println("<script>alert('Invalid Bill ID'); location='customerDashboard.html';</script>");
+        String redirectPage;
+        String billIdToUse;
+
+        if (billIdAdm != null && !billIdAdm.isEmpty()) {
+            // Admin side
+            billIdToUse = billIdAdm;
+            redirectPage = request.getContextPath()+"/viewBills.html";
+        } else if (billIdStr != null && !billIdStr.isEmpty()) {
+            // Customer side
+            billIdToUse = billIdStr;
+            redirectPage = request.getContextPath()+"/customerDashboard.html";
+        } else {
+            out.println("<script>alert('Invalid Bill ID'); window.history.back();</script>");
             return;
         }
 
-        int billId = Integer.parseInt(billIdStr);
+        try {
+            int billId = Integer.parseInt(billIdToUse);
 
-        try (Connection con = DBConnection.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE bill SET status='Paid' WHERE id=?");
-            ps.setInt(1, billId);
+            try (Connection con = DBConnection.getConnection()) {
+                PreparedStatement ps = con.prepareStatement("UPDATE bill SET status='Paid' WHERE id=?");
+                ps.setInt(1, billId);
 
-            int rowsUpdated = ps.executeUpdate();
+                int rowsUpdated = ps.executeUpdate();
 
-            if (rowsUpdated > 0) {
-                out.println("<script>alert('Bill Paid Successfully'); location='customerDashboard.html';</script>");
-            } else {
-                out.println("<script>alert('Bill not found or already paid'); location='customerDashboard.html';</script>");
+                if (rowsUpdated > 0) {
+                    out.println("<script>alert('Bill Paid Successfully'); location='" + redirectPage + "';</script>");
+                } else {
+                    out.println("<script>alert('Bill not found or already paid'); location='" + redirectPage + "';</script>");
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            out.println("<script>alert('Error processing payment'); location='customerDashboard.html';</script>");
+            out.println("<script>alert('Error processing payment'); location='" + redirectPage + "';</script>");
         }
     }
 }

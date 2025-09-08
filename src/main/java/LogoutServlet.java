@@ -11,7 +11,7 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
 		 response.setContentType("text/html");
          PrintWriter out = response.getWriter();
-     	out.println("<script>alert('Logged out successfully'); location='login.html';</script>");
+     	out.println("<script>alert('Logged out successfully'); location='"+request.getContextPath()+"/login.html';</script>");
 
 
     }
@@ -24,6 +24,6 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate();
         }
-    	out.println("<script>alert('Logged out successfully'); location='login.html';</script>");
+    	out.println("<script>alert('Logged out successfully'); location='"+request.getContextPath()+"/login.html';</script>");
     }
 }

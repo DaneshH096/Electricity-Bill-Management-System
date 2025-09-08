@@ -19,7 +19,7 @@ public class DownloadBillServlet extends HttpServlet {
         if (billId == null || billId.isEmpty()) {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
-            out.println("<h3>Invalid Bill ID</h3>");
+         	out.println("<script>alert('Invalid Bill ID');</script>");
             return;
         }
 
@@ -65,14 +65,14 @@ public class DownloadBillServlet extends HttpServlet {
             } else {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.println("<h3>No bill found for ID: " + billId + "</h3>");
+             	out.println("<script>alert('>No bill found for ID: " + billId + "');</script>");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
-            out.println("<h3>Error generating bill PDF: " + e.getMessage() + "</h3>");
+            out.println("<script>alert('Error generating bill PDF: " + e.getMessage() + " " + billId + "');</script>");
         }
     }
 }

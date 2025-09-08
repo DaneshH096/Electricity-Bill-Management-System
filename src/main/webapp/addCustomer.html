@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Add Customer</title>
+  <title>Register Customer</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
   <div class="glass-container">
-    <h2>Add New Customer</h2>
-    <form method="post" action="AddCustomerServlet">
+    <h2>Register Customer</h2>
+    <form method="post" action="RegisterCustomerServlet">
       <label>Name:</label>
       <input type="text" name="name" required><br>
 
@@ -25,9 +25,9 @@
       <label>Password:</label>
       <input type="password" name="password" required><br>
 
-      <button type="submit">Add Customer</button>
+      <button type="submit">Register</button>
     </form>
-    <button onclick="window.history.back()">Back</button>
+    <p>Already have an Acccount ? <a href=login.html>click here</a> 
   </div>
 
   <script src="js/popup.js"></script>

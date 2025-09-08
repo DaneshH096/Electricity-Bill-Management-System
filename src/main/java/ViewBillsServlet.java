@@ -57,6 +57,13 @@ public class ViewBillsServlet extends HttpServlet {
                 } else {
                     out.println("<td>✔️</td>");
                 }
+                
+                out.println("<td>");
+                out.println("<form method='post' action='DeleteBillServlet' style='display:inline;margin-left:10px;' onsubmit='return confirm(\"Are you sure you want to delete this bill?\");'>");
+                out.println("<input type='hidden' name='id' value='" + id + "'>");
+                out.println("<button type='submit' style='background-color:red;color:white;'>Delete</button>");
+                out.println("</form>");
+                out.println("</td>");
                 out.println("</tr>");
             }
             out.println("</table>");

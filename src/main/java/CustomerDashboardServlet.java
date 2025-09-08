@@ -25,7 +25,7 @@ public class CustomerDashboardServlet extends HttpServlet {
         // Step 1: Get the session and check if meter_no is present
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("meter_no") == null) {
-         	out.println("<script>alert('Logged out successfully'); location='login.html';</script>");
+         	out.println("<script>alert('Logged out successfully'); location='"+request.getContextPath()+"/login.html';</script>");
              // End the request-response cycle if session is invalid
         }
 
@@ -76,7 +76,7 @@ public class CustomerDashboardServlet extends HttpServlet {
                 out.println("<div class='no-data-message'>No bills found for meter number " + meterNo + ".</div>");
             } else {
                 // Step 5: Output the bills in an HTML table
-                out.println("<table>");
+                out.println("<table border='1' class='glass-table'>");
                 out.println("<tr><th>Month</th><th>Units</th><th>Amount</th><th>Status</th><th>Download</th></tr>");
                 
                 while (rs.next()) {
@@ -104,8 +104,9 @@ public class CustomerDashboardServlet extends HttpServlet {
                     out.println("<button type='submit' class='download-btn'>Download</button>");
                     out.println("</form>");
                     out.println("</td>");
-                    out.println("<td>");
+                    out.println("</td>");
                     if ("Unpaid".equalsIgnoreCase(status)) {
+                    	out.println("<td>");
                         out.println("<form method='post' action='PayBillServlet'>");
                         out.println("<input type='hidden' name='bill_id' value='" + rs.getInt("id") + "'>");
                         out.println("<button type='submit' style='background-color: #28a745; color: white;'>Pay Now</button>");
