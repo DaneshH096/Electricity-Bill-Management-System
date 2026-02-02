@@ -1,14 +1,19 @@
-# Use Tomcat 10 with JDK 17
 FROM tomcat:10.1-jdk17
 
-# Remove default ROOT app
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+# Railway injects PORT dynamically
+ENV PORT=8080
 
-# Copy your WAR file into Tomcat and rename as ROOT.war
-COPY build/ElectricityBill.war /usr/local/tomcat/webapps/ROOT.war
+# Remove default apps (clean)
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Expose port 8080 (Railway maps it automatically)
-EXPOSE 8080
+# Copy your WAR as ROOT
+COPY target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
+
+# 🔥 Replace Tomcat connector port with Railway PORT
+RUN sed -i 's/port="8080"/port="${PORT}"/' /usr/local/tomcat/conf/server.xml
+
+# Expose the dynamic port
+EXPOSE ${PORT}
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]
