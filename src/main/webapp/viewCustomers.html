@@ -1,30 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>View Customers</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="assets/logo.jpg" type="image/x-icon">
+<meta charset="UTF-8">
+<title>View Customers</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="assets/logo.jpg" type="image/x-icon">
+
+<style>
+
+/* Thunder Loader Background */
+.loader-wrapper{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#0f172a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+}
+
+/* Thunder Bolt */
+.thunder{
+    width:60px;
+    height:100px;
+    background:linear-gradient(180deg,#fff,#00e5ff);
+    clip-path: polygon(40% 0, 60% 0, 45% 45%, 70% 45%, 30% 100%, 45% 55%, 30% 55%);
+    animation: flash 1s infinite;
+}
+
+/* Flash Animation */
+@keyframes flash{
+    0%{opacity:0.2; transform:scale(0.9);}
+    50%{opacity:1; transform:scale(1.2);}
+    100%{opacity:0.2; transform:scale(0.9);}
+}
+
+.loading-text{
+    color:white;
+    margin-top:15px;
+    font-size:18px;
+}
+
+</style>
+
 </head>
+
 <body>
-  <div class="glass-container">
-    <h2>All Customers</h2>
-    <div id="customer-table">Loading...</div>
-    <br><button onclick="window.history.back()">Back</button>
-  </div>
 
-  <script src="js/popup.js"></script>
-  <script>
-    fetch("AllCustomersServlet")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("customer-table").innerHTML = html;
-      });
+<!-- Thunder Loading Screen -->
+<div id="loader" class="loader-wrapper">
+    <div class="thunder"></div>
+    <div class="loading-text">Loading Customers...</div>
+</div>
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const msg = urlParams.get("message");
-    const status = urlParams.get("status");
-    if (msg && status) showPopup(msg, status);
-  </script>
+
+<div class="glass-container">
+<h2>All Customers</h2>
+<div id="customer-table"></div>
+<br>
+<button onclick="window.history.back()">Back</button>
+</div>
+
+
+<script src="js/popup.js"></script>
+
+<script>
+
+fetch("AllCustomersServlet")
+.then(res => res.text())
+.then(html => {
+
+    document.getElementById("customer-table").innerHTML = html;
+
+    /* Hide loader */
+    document.getElementById("loader").style.display="none";
+});
+
+const urlParams = new URLSearchParams(window.location.search);
+const msg = urlParams.get("message");
+const status = urlParams.get("status");
+
+if (msg && status) showPopup(msg, status);
+
+</script>
+
 </body>
 </html>
